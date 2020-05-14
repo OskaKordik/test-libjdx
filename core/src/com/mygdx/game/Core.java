@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.screens.GameScreen;
 
 public class Core extends ApplicationAdapter {
-    public static final float VIRTUAL_WIDTH = 960;
-    public static final float VIRTUAL_HEIGHT = 540;
+    public static final float VIRTUAL_WIDTH = 900;
+    public static final float VIRTUAL_HEIGHT = 1600;
     Screen screen;
 
     @Override
@@ -35,8 +35,7 @@ public class Core extends ApplicationAdapter {
         this.screen = screen;
         if (this.screen != null) {
             this.screen.show();
-            this.screen.resize(Gdx.graphics.getWidth(),
-                    Gdx.graphics.getHeight());
+            this.screen.resize(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
         }
     }
 }

@@ -60,7 +60,7 @@ public class PlayerSystem extends EntitySystem implements EntityListener {
         vector3.set(0, 0, 0);
         camera.rotate(camera.up, deltaX);
         vector3.set(camera.direction).crs(camera.up).nor();
-//        camera.direction.rotate(vector3, deltaY);
+        camera.direction.rotate(vector3, deltaY);
         vector3.set(0, 0, 0);
         characterComponent.characterDirection.set(-1, 0, 0).rot(modelComponent.instance.transform).nor();
         characterComponent.walkDirection.set(0, 0, 0);
@@ -68,11 +68,11 @@ public class PlayerSystem extends EntitySystem implements EntityListener {
 //        if (Gdx.input.isKeyPressed(Input.Keys.S)) characterComponent.walkDirection.sub(camera.direction);
 //        if (Gdx.input.isKeyPressed(Input.Keys.A)) tmp.set(camera.direction).crs(camera.up).scl(-1);
 //        if (Gdx.input.isKeyPressed(Input.Keys.D)) tmp.set(camera.direction).crs(camera.up);
-        if (Gdx.input.isTouched()) {
-            characterComponent.walkDirection.add(camera.direction);
-            vector3.set(camera.direction).crs(camera.up);
-            System.out.println("Touched! **** ");
-        }
+//        if (Gdx.input.isTouched()) {
+//            characterComponent.walkDirection.add(camera.direction);
+//            vector3.set(camera.direction).crs(camera.up);
+//            System.out.println("Touched! **** ");
+//        }
 //        if (Gdx.input.isTouched()) vector3.set(camera.direction).crs(camera.up);
 
         characterComponent.walkDirection.add(vector3);
@@ -86,7 +86,7 @@ public class PlayerSystem extends EntitySystem implements EntityListener {
                 0f, translation.y, translation.z,
                 0f, camera.direction.y, camera.direction.z, 0);
 
-        camera.position.set(0f, translation.y, translation.z);
+//        camera.position.set(0f, translation.y, translation.z);
         camera.update(true);
     }
 }
