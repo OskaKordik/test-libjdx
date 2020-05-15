@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_standard">16dp</dimen>
+    <dimen name="margin_medium">24dp</dimen>
+    <dimen name="margin_big">32dp</dimen>
+    <dimen name="margin_large">48dp</dimen>
+
+    <dimen name="text_size_standard">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+
+    <dimen name="space_very_low">2dp</dimen>
+    <dimen name="space_low">4dp</dimen>
+    <dimen name="space">8dp</dimen>
+    <dimen name="space_normal">10dp</dimen>
+    <dimen name="space_medium">12dp</dimen>
+    <dimen name="space_large">16dp</dimen>
+    <dimen name="space_larger">20dp</dimen>
+    <dimen name="space_xlarge">24dp</dimen>
+    <dimen name="space_xxlarge">32dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="image_small">36dp</dimen>
+    <dimen name="image_medium">48dp</dimen>
+    <dimen name="image_big">64dp</dimen>
+    <dimen name="min_input_height">48dp</dimen>
+
+    <!-- region Spacing dimens-->
+    <dimen name="no_spacing">0dp</dimen>
+    <dimen name="spacing">1dp</dimen>
+    <dimen name="spacing_0">4dp</dimen>
+    <dimen name="spacing_1">8dp</dimen>
+    <dimen name="spacing_2">16dp</dimen>
+    <dimen name="spacing_3">24dp</dimen>
+    <dimen name="spacing_4">32dp</dimen>
+    <dimen name="spacing_5">20dp</dimen>
+    <dimen name="spacing_6">30dp</dimen>
+    <dimen name="spacing_7">40dp</dimen>
+    <dimen name="spacing_8">60dp</dimen>
+    <dimen name="spacing_9">80dp</dimen>
+    <dimen name="spacing_10">100dp</dimen>
+    <dimen name="spacing_11">130dp</dimen>
+    <dimen name="spacing_13">18dp</dimen>
+    <dimen name="spacing_top_logo">60dp</dimen>
+    <dimen name="logo_auth_size">200dp</dimen>
+    <dimen name="spacing_fb">13dp</dimen>
+    <dimen name="spacing_12">70dp</dimen>
+    <dimen name="spacing_14">66dp</dimen>
+    <!-- endregion -->
+    <dimen name="profile_photo_size">120dp</dimen>
+    <dimen name="photo_change_size">50dp</dimen>
+    <dimen name="oval_size">21dp</dimen>
+</resources>

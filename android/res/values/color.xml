@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_background_color">#FFFFFFFF</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">@color/orange</color>
+
+    <color name="red">@android:color/holo_red_dark</color>
+    <color name="yellow">#ffd136</color>
+    <color name="yellow_contrast">#ffd25c</color>
+    <color name="orange">#ffce29</color>
+    <color name="black">#000000</color>
+    <color name="black_light">#3A3838</color>
+    <color name="gray">#a7a7a7</color>
+    <color name="gray_light">#393939</color>
+    <color name="gray_dark">#555555</color>
+    <color name="gray_dracula">#1f1f1f</color>
+    <color name="dialog_color">#343434</color>
+    <color name="white">#ffffffff</color>
+    <color name="green">#84b72c</color>
+    <color name="transparent">@android:color/transparent</color>
+
+    <color name="separator_color">@color/gray</color>
+    <color name="hintTextColor">#80FFFFFF</color>
 </resources>
