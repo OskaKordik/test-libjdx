@@ -131,7 +131,7 @@ public class GameWorld {
         instances.add(modelInstance2);
         instances.add(modelInstance3);
         instances.add(modelInstance4);
-        instances.add(modelInstanceParapet);
+//        instances.add(modelInstanceParapet);
 
         loading = false;
     }
@@ -183,6 +183,8 @@ public class GameWorld {
 
             if (x > 10f) {
                 x -= 0.5f;
+            } else {
+                start = false;
             }
             if (y < 10f) {
                 y += 0.5f;
