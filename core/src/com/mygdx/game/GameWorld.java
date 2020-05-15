@@ -2,10 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -15,7 +13,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
 import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
@@ -24,7 +21,6 @@ import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.components.CharacterComponent;
 import com.mygdx.game.components.ModelComponent;
-import com.mygdx.game.components.PlayerComponent;
 import com.mygdx.game.managers.EntityFactory;
 import com.mygdx.game.systems.BulletSystem;
 import com.mygdx.game.systems.PlayerSystem;
@@ -52,6 +48,8 @@ public class GameWorld {
     public AssetManager assetManager;
     public boolean loading;
     private float x = 100;
+    private float y = 0;
+    static boolean start = false;
 
     public BulletSystem bulletSystem;
 
@@ -72,6 +70,7 @@ public class GameWorld {
                     FloatAttribute.createShininess(16f)),
             VertexAttributes.Usage.Position
                     | VertexAttributes.Usage.Normal);
+
 
     public GameWorld() {
         Bullet.init();
@@ -98,29 +97,41 @@ public class GameWorld {
         Model model3 = assetManager.get("models/IPSC_popper_850.obj", Model.class);
         Model model4 = assetManager.get("models/USPSA_metric.obj", Model.class);
 
+        Model parapet = modelBuilder.createCapsule(
+                10f, 80f, 16,
+                new Material(ColorAttribute.createDiffuse(Color.BROWN),
+                        ColorAttribute.createSpecular(Color.BROWN),
+                        FloatAttribute.createShininess(16f)),
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal
+                        | VertexAttributes.Usage.TextureCoordinates);
+
         ModelInstance modelInstance1 = new ModelInstance(model1);
         ModelInstance modelInstance2 = new ModelInstance(model2);
         ModelInstance modelInstance3 = new ModelInstance(model3);
         ModelInstance modelInstance4 = new ModelInstance(model4);
+        ModelInstance modelInstanceParapet = new ModelInstance(parapet);
 
         modelInstance1.transform.scale(10.0f, 10.0f, 10.0f);
-        modelInstance1.transform.setTranslation(-20.0f, 10.0f, -30.0f);
+        modelInstance1.transform.setTranslation(-10.0f, 10.0f, -30.0f);
 //        modelInstance1.transform.setToRotation(Vector3.X, 10);
 
         modelInstance2.transform.scale(300.0f, 300.0f, 300.0f);
-        modelInstance2.transform.setTranslation(-15.0f, 10.0f, -30.0f);
+        modelInstance2.transform.setTranslation(-5.0f, 10.0f, -30.0f);
 
         modelInstance3.transform.scale(850.0f, 850.0f, 850.0f);
-        modelInstance3.transform.setTranslation(-10.0f, 10.0f, -30.0f);
+        modelInstance3.transform.setTranslation(5.0f, 10.0f, -30.0f);
 
         modelInstance4.transform.scale(10.0f, 10.0f, 10.0f);
-        modelInstance4.transform.setTranslation(-5.0f, 10.0f, -30.0f);
-//        modelInstance4.transform.setToRotation(10f, 10f, 10f, 50f, 10f, 10f);
+        modelInstance4.transform.setTranslation(10.0f, 10.0f, -30.0f);
+
+        modelInstanceParapet.transform.setToRotation(Vector3.Z, 90);
+        modelInstanceParapet.calculateTransforms();
 
         instances.add(modelInstance1);
         instances.add(modelInstance2);
         instances.add(modelInstance3);
         instances.add(modelInstance4);
+        instances.add(modelInstanceParapet);
 
         loading = false;
     }
@@ -131,6 +142,7 @@ public class GameWorld {
     }
 
     private void createGround() {
+
         engine.addEntity(EntityFactory.createStaticEntity
                 (groundModel,0, 0, 0));
         engine.addEntity(EntityFactory.createStaticEntity
@@ -160,17 +172,27 @@ public class GameWorld {
     protected void renderWorld(float delta) {
         if (loading && assetManager.update())
             doneLoading();
-        perspectiveCamera.update();
 
-        if (x > 10f) {
-            x -= 0.5f;
-        }
+
         modelBatch.begin(perspectiveCamera);
 //        modelBatch.render(instance);
         modelBatch.render(instances, environment);
         engine.update(delta);
         modelBatch.end();
-        perspectiveCamera.position.set(x, x, 0f);
+        if (start) {
+
+            if (x > 10f) {
+                x -= 0.5f;
+            }
+            if (y < 10f) {
+                y += 0.5f;
+            }
+
+            perspectiveCamera.position.set(0f, x, x);
+            perspectiveCamera.lookAt(0f, y, 0f);
+        }
+
+        perspectiveCamera.update();
 
         //create shadow texture
         shadowLight.begin(Vector3.Zero, perspectiveCamera.direction);
@@ -183,11 +205,11 @@ public class GameWorld {
 
     private void initPersCamera() {
         perspectiveCamera = new PerspectiveCamera(FOV, Core.VIRTUAL_WIDTH, Core.VIRTUAL_HEIGHT);
-        perspectiveCamera.position.set(100f, 100f, 0f);
+        perspectiveCamera.position.set(0f, 100f, 100f);
         //вид сверху
 //        perspectiveCamera.position.set(0f, 100f, 0f);
 
-        perspectiveCamera.lookAt(100f, 100f, 100f);
+        perspectiveCamera.lookAt(0f, 0f, 0f);
         perspectiveCamera.near = 1f;
         perspectiveCamera.far = 300f;
         perspectiveCamera.update();

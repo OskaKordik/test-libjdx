@@ -35,8 +35,7 @@ public class EntityFactory {
 
     static {
         modelBuilder = new ModelBuilder();
-        playerTexture = new
-                Texture(Gdx.files.internal("badlogic.jpg"));
+        playerTexture = new Texture(Gdx.files.internal("textures/grey_texture.jpg"));
         Material material = new
                 Material(TextureAttribute.createDiffuse(playerTexture),
                 ColorAttribute.createSpecular(1, 1, 1, 1),
